@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Player Statistics</title>
+  <!-- Link to Plotly CDN for rendering radar chart -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <style>
+    /* Change color of select menu options to red */
+    select {
+      color: red;
+    }
+
+    /* Change color of input fields to red */
+    input[type="text"], input[type="number"] {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Player Statistics</h1>
+
+  <form method="post">
+    <label for="player_select">Select Player:</label>
+    <select id="player_select" name="player_select">
+      <option value="">Select</option>
+      <option value="Player 1">Player 1</option>
+      <option value="Player 2">Player 2</option>
+      <!-- Add more options for other players -->
+    </select>
+    <input type="submit" value="Submit">
+  </form>
+
+  {% if selected_player %}
+    <h2>{{ selected_player }} Statistics</h2>
+    <ul>
+      {% for stat in player_stats %}
+        <li>{{ stat }}: {{ player_stats[stat] }}</li>
+      {% endfor %}
+    </ul>
+
+    <h2>{{ selected_player }} Performance</h2>
+    <div id="radar_chart">{{ radar_chart }}</div>
+  {% endif %}
+</body>
+</html>
